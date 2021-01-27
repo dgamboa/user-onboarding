@@ -36,10 +36,16 @@ export default function App() {
 
   return (
     // (3) Basic JSX Structure for App:
-    <div className="App">
+    <div className="container">
       <header><h1>User Onboarding App</h1></header>
 
-      <Form />
+      <Form
+        values={formValues}
+        change={inputChange}
+        submit={formSubmit}
+        disabled={disabled}
+        errors={formErrors}
+      />
 
       {
         users.map(user => {
