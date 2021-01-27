@@ -6,11 +6,14 @@ export default function Form(props) {
 
   // (6) Helper Functions:
   const onChange = (event) => {
-
+    const { name, type, value, checked } = event.target;
+    const valueToChange = type === 'checkbox' ? checked : value;
+    change(name, valueToChange);
   }
 
   const onSubmit = (event) => {
-    
+    event.preventDefault();
+    submit()
   }
 
   return (
@@ -23,7 +26,7 @@ export default function Form(props) {
           <div>{errors.name}</div>
           <div>{errors.email}</div>
           <div>{errors.password}</div>
-          <div>{errors.termsOfService}</div>
+          <div>{errors.terms}</div>
         </div>
       </div>
 
@@ -59,7 +62,7 @@ export default function Form(props) {
           <input
             type='checkbox'
             name='terms'
-            value={values.termsOfService}
+            checked={values.terms}
             onChange={onChange}
           />
         </label>

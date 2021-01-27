@@ -14,14 +14,14 @@ const initialFormValues = {
   name: '',
   email: '',
   password: '',
-  termsOfService: false
+  terms: false
 };
 
 const initialFormErrors = {
   name: '',
   email: '',
   password: '',
-  termsOfService: ''
+  terms: ''
 };
 
 const initialDisabled = true;
@@ -35,12 +35,12 @@ export default function App() {
   const [users, setUsers] = useState(initialUsers);
 
   // (7) Helper Functions:
-  const inputChange = () => {
-
+  const inputChange = (name, value) => {
+    setFormValues({...formValues, [name]: value})
   }
 
   const formSubmit = () => {
-
+    
   }
 
   return (
