@@ -5,12 +5,6 @@ import axios from 'axios';
 import schema from '../validation/formSchema';
 import * as yup from 'yup';
 
-// - [ ] Name
-// - [ ] Email
-// - [ ] Password
-// - [ ] Terms of Service (checkbox)
-// - [ ] A Submit button to send our form data to the server.
-
 // (1) Initial States:
 const initialFormValues = {
   name: '',
