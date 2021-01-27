@@ -1,7 +1,9 @@
-import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from './Form';
 import User from './User';
+import axios from 'axios';
+import schema from '../validation/formSchema';
+import * as yup from 'yup';
 
 // - [ ] Name
 // - [ ] Email
@@ -34,14 +36,47 @@ export default function App() {
   const [disabled, setDisabled] = useState(initialDisabled);
   const [users, setUsers] = useState(initialUsers);
 
+  // (9) Validation Helper:
+  const validate = (name, value) => {
+    yup.reach(schema, name).validate(value)
+      .then(valid => setFormErrors({ ...formErrors, [name]: ' '}))
+      .catch(e => setFormErrors({ ...formErrors, [name]: e.errors[0] }))
+  };
+
+  // (11) POST Request Helper:
+  const postNewUser = (user) => {
+    axios.post('https://reqres.in/api/users', user)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+        debugger;
+      })
+  };
+
   // (7) Helper Functions:
   const inputChange = (name, value) => {
+    validate(name, value);
     setFormValues({...formValues, [name]: value})
-  }
+  };
 
   const formSubmit = () => {
-    
-  }
+    const newUser = {
+      name: formValues.name.trim(),
+      email: formValues.email.trim(),
+      password: formValues.password.trim(),
+      terms: formValues.terms
+    };
+    postNewUser(newUser);
+  };
+
+  // (10) Set Up Side Effects:
+  useEffect(() => {
+    schema.isValid(formValues).then(valid => {
+      setDisabled(!valid);
+    })
+  }, [formValues])
 
   return (
     // (3) Basic JSX Structure for App:
