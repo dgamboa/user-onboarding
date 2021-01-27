@@ -42,10 +42,14 @@ export default function App() {
     axios.post('https://reqres.in/api/users', user)
       .then(res => {
         console.log(res);
+        setUsers([...users, res.data]);
       })
       .catch(err => {
         console.log(err);
         debugger;
+      })
+      .finally( () => {
+        setFormValues(initialFormValues);
       })
   };
 
