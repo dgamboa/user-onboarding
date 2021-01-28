@@ -49,7 +49,7 @@ Set up tests that will...
 - [x] Set up a test that will check to see if a user can check the terms of service box
 - [x] Check to see if a user can submit the form data
 - [x] Check for form validation if an input is left empty
-- [x] Run all tests without the GUI
+- [x] Run all tests without the GUI using `npx cypress run -s "<filepath>"`
 
 ### Task 3: Stretch Goals
 
